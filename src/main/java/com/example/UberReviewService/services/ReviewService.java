@@ -1,17 +1,18 @@
 package com.example.UberReviewService.services;
 
 import com.example.UberReviewService.models.Booking;
+import com.example.UberReviewService.models.CustomDriver;
 import com.example.UberReviewService.models.Driver;
 import com.example.UberReviewService.models.Review;
 import com.example.UberReviewService.repositories.BookingRepository;
 import com.example.UberReviewService.repositories.DriverRepository;
 import com.example.UberReviewService.repositories.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.awt.print.Book;
+import java.util.*;
 
 @Service
 public class ReviewService implements CommandLineRunner {
@@ -27,6 +28,7 @@ public class ReviewService implements CommandLineRunner {
         this.driverRepository = driverRepository;
     }
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
 
 //        System.out.println("************");
@@ -39,9 +41,19 @@ public class ReviewService implements CommandLineRunner {
 //       this.bookingRepository.save(r1);
 //       //this.reviewRepository.save(r);
 
-        Optional<Driver> driver=driverRepository.findByIdAndLicenseNumber(1L,"abcdef");
+//        Optional<Driver> driver=driverRepository.findByIdAndLicenseNumber(1L,"abcdef");
+//
+//        CustomDriver d=driverRepository.rawFindByIdAndName(1L,"abcdef");
+//        System.out.println(d.getName());
 
-        Optional<Driver> d=driverRepository.rawFindByIdAndName(1L,"abcdef");
+        List<Long> driverIds=new ArrayList<>(Arrays.asList(1L,2L,3L,5L));
 
+        List<Driver> drivers=driverRepository.findAllByIdIn(driverIds);
+
+        for(Driver driver:drivers)
+        {
+            List<Booking> bookings=driver.getBookings();
+            bookings.forEach(booking-> System.out.println(booking.getId()));
+        }
     }
 }
