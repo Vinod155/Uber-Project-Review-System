@@ -9,7 +9,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@PrimaryKeyJoinColumn(name="driver_review_id")
 public class PassengerReview extends Review {
 
     @Column(nullable = false)

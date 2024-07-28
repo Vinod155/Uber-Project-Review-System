@@ -19,10 +19,10 @@ public class Booking  extends BaseModel{
     @Enumerated(value = EnumType.STRING)
     private BookingStatus bookingStatus;
 
-    @Temporal(value= TemporalType.DATE)
+    @Temporal(value= TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @Temporal(value= TemporalType.DATE)
+    @Temporal(value= TemporalType.TIMESTAMP)
     private Date endTime;
 
     private Long totalDistance;

@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 public abstract class BaseModel {
-    @Id   // this annotations makes the id property as primary key of our table
+    @Id   // these annotations make the id property as primary key of our table
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
